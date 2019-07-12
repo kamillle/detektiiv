@@ -1,6 +1,16 @@
 require "detektiiv/version"
+require "detektiiv/configuration"
 
 module Detektiiv
-  class Error < StandardError; end
-  # Your code goes here...
+  class << self
+    def configure
+      yield(configuration)
+    end
+
+    private
+
+    def configuration
+      @configuration ||= Detektiiv::Configuration.new
+    end
+  end
 end
