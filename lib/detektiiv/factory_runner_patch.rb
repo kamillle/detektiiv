@@ -3,13 +3,14 @@ module Detektiiv
     LOGGER = Logger.new("#{Detektiiv.configuration.logfile_path}")
 
     def run
-      logging
+      logging_bad_factory_call
+
       super
     end
 
     private
 
-    def logging
+    def logging_bad_factory_call
       factory_defined_filename = FactoryBot
                                   .factory_by_name(@name)
                                   .instance_variable_get(:@definition)
