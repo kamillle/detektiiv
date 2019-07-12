@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Detektiiv do
   it "has a version number" do
     expect(Detektiiv::VERSION).not_to be nil

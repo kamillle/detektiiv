@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "detektiiv/version"
 require "detektiiv/configuration"
 

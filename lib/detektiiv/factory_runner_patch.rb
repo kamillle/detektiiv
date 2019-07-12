@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Detektiiv
   module FactoryRunnerPatch
     LOGGER = Logger.new("#{Detektiiv.configuration.logfile_path}")
