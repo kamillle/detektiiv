@@ -15,6 +15,8 @@ module Detektiiv
     def exec_patch!
       ActiveSupport.on_load :factory_bot do
         require "detektiiv/factory_runner_patch"
+
+        ::FactoryBot::FactoryRunner.prepend Detektiiv::FactoryRunnerPatch
       end
     end
   end
