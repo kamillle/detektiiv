@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["kamillle"]
   spec.email         = ["yuji.kmjm@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{Detect factory file defined other namespace.}
+  spec.description   = %q{Detect factory file defined other namespace.}
   spec.homepage      = "https://github.com/kamillle/detektiiv"
   spec.license       = "MIT"
 
