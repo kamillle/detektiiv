@@ -1,6 +1,5 @@
 require "detektiiv/version"
 require "detektiiv/configuration"
-require "active_support/lazy_load_hooks"
 
 module Detektiiv
   class << self
@@ -13,11 +12,9 @@ module Detektiiv
     end
 
     def exec_patch!
-      ActiveSupport.on_load :factory_bot do
-        require "detektiiv/factory_runner_patch"
+      require "detektiiv/factory_runner_patch"
 
-        ::FactoryBot::FactoryRunner.prepend Detektiiv::FactoryRunnerPatch
-      end
+      ::FactoryBot::FactoryRunner.prepend Detektiiv::FactoryRunnerPatch
     end
   end
 end
