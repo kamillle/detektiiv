@@ -3,7 +3,7 @@ module Detektiiv
     attr_accessor :application_name, :logfile_path
 
     def initialize
-      @application_name = ::Rails.application.class.name.split('::').first.underscore
+      @application_name = ''
       @logfile_path     = '/tmp/detektiiv.log'
     end
   end
