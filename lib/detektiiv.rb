@@ -8,15 +8,15 @@ module Detektiiv
       yield(configuration)
     end
 
-    private
-
     def configuration
       @configuration ||= Detektiiv::Configuration.new
+    end
+
+    def exec_patch!
+      ActiveSupport.on_load :factory_bot do
+        require "detektiiv/factory_runner_patch"
+      end
     end
   end
 end
 
-ActiveSupport.on_load :factory_bot do
-  # TODO: このblock内でfactory_botにパッチを当てる
-  #       パッチ自体は別のクラスに隠蔽する
-end
