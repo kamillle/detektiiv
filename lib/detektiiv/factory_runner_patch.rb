@@ -16,8 +16,8 @@ module Detektiiv
       if factory_defined_filename&.to_s&.include?("#{Detektiiv.configuration.application_name}/spec/factories") || factory_defined_filename&.to_s&.include?('factory_bot') || factory_defined_filename.nil?
         return
       else
-        LOG.debug(factory_defined_filename)
-        LOG.debug(caller: caller.select {|i| i.include?("#{Detektiiv.configuration.application_name}/spec") }.to_s)
+        LOGGER.debug(factory_defined_filename)
+        LOGGER.debug(caller: caller.select {|i| i.include?("#{Detektiiv.configuration.application_name}/spec") }.to_s)
       end
     end
   end
