@@ -27,6 +27,14 @@ end
 Detektiiv.exec_patch!
 ```
 
+Then running test. If there are calling factory defined in other namespace, below log shows up.
+
+```
+# Logfile created on 2019-07-13 13:33:02 +0900 by logger.rb/61378
+{:filepath=>#<Proc:0x00007fb3a43c4c18@/Users/kamillle/sample_app/.bundle/bundler/gems/other_app/spec/factories/book.rb:3>}
+{:caller=>"[\"/Users/kamillle/sample_app/spec/models/author_spec.rb:50:in `block (3 levels) in <top (required)>'\"]"}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
