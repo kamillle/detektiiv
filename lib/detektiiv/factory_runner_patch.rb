@@ -2,8 +2,6 @@
 
 module Detektiiv
   module FactoryRunnerPatch
-    LOGGER = Logger.new("#{Detektiiv.configuration.logfile_path}")
-
     def run
       logging_bad_factory_call
 
@@ -24,9 +22,19 @@ module Detektiiv
       if factory_defined_filename&.to_s&.include?("#{Detektiiv.configuration.application_name}/spec/factories") || factory_defined_filename&.to_s&.include?('factory_bot') || factory_defined_filename.nil?
         return
       else
-        LOGGER.debug(factory_defined_filename)
-        LOGGER.debug(caller: caller.select {|i| i.include?("#{Detektiiv.configuration.application_name}/spec") }.to_s)
+        logger.debug(filepath: factory_defined_filename)
+        logger.debug(caller: caller.select {|i| i.include?("#{Detektiiv.configuration.application_name}/spec") }.to_s)
       end
+    end
+
+    def logger
+      @logger ||= Logger.new("#{Detektiiv.configuration.logfile_path}")
+
+      @logger.formatter = proc do |_severity, _datetime, _progname, msg|
+        "#{msg}\n"
+      end
+
+      @logger
     end
   end
 end
