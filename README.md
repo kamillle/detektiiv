@@ -16,7 +16,16 @@ And then execute:
 
 ## Usage
 
-TODO: Write usage instructions here
+Initialize Detektiiv after loading factory_bot gem.
+
+```
+Detektiiv.configure do |config|
+  config.application_name = 'Rails application name'
+  config.logfile_path = '/tmp/detektiiv.log'
+end
+
+Detektiiv.exec_patch!
+```
 
 ## Development
 
