@@ -11,13 +11,6 @@ module Detektiiv
     private
 
     def logging_bad_factory_call
-      factory_defined_filename = FactoryBot
-                                  .factory_by_name(@name)
-                                  .instance_variable_get(:@definition)
-                                  .instance_variable_get(:@declarations)
-                                  .instance_variable_get(:@declarations)[0]
-                                  .instance_variable_get(:@block)
-
       trait_defined_filenames = @traits.map { |trait_name|
                                   FactoryBot
                                     .factory_by_name(@name)
@@ -27,19 +20,14 @@ module Detektiiv
                                     .select { |i| i.instance_variable_get(:@name).to_s.include?(trait_name.to_s) }.first.first
                                 }
 
-      # return if factory_defined_filename.nil? || factory_defined_filename.to_s.include?("#{Detektiiv.configuration.application_name}/spec/factories")
-
-      if factory_defined_filename.to_s.include?('definition_proxy')
+      if trait_defined_filenames.present?
         trait_defined_filenames.each do |trait_info|
-          logger.debug(trait_name: trait_info.instance_variable_get(:@name), trait_defined_path: trait_info.instance_variable_get(:@block))
+          unless trait_info.instance_variable_get(:@block).to_s.include?("#{Detektiiv.configuration.application_name}/spec")
+            logger.debug(trait_name: trait_info.instance_variable_get(:@name), trait_defined_path: trait_info.instance_variable_get(:@block))
+          end
+          logger.debug(caller: caller.select { |i| i.include?("#{Detektiiv.configuration.application_name}/spec") })
         end
-        logger.debug(caller: caller.select { |i| i.include?("#{Detektiiv.configuration.application_name}/spec") })
-
-        return
       end
-
-      logger.debug(filepath: factory_defined_filename)
-      logger.debug(caller: caller.select { |i| i.include?("#{Detektiiv.configuration.application_name}/spec") })
     end
 
     def logger
