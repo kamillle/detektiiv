@@ -11,6 +11,9 @@ module Detektiiv
     private
 
     def logging_bad_factory_call
+      # return if factory defined using parent cuz the process fails in assignment to trait_defined_filenames
+      return if FactoryBot.factory_by_name(@name).instance_variable_get(:@parent)
+
       trait_defined_filenames = @traits.map { |trait_name|
                                   FactoryBot
                                     .factory_by_name(@name)
