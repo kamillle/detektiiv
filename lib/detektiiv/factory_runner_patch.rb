@@ -24,8 +24,8 @@ module Detektiiv
         trait_defined_filenames.each do |trait_info|
           unless trait_info.instance_variable_get(:@block).to_s.include?("#{Detektiiv.configuration.application_name}/spec")
             logger.debug(trait_name: trait_info.instance_variable_get(:@name), trait_defined_path: trait_info.instance_variable_get(:@block))
+            logger.debug(caller: caller.select { |i| i.include?("#{Detektiiv.configuration.application_name}/spec") })
           end
-          logger.debug(caller: caller.select { |i| i.include?("#{Detektiiv.configuration.application_name}/spec") })
         end
       end
     end
